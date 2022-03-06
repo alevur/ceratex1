@@ -9,11 +9,12 @@ if (!empty($_POST['form_data']) && $_POST['action'] == 'btn_save') {
     $firstName = $form_data['first_name'];
     $secondName = $form_data['second_name'];
     $age = $form_data['age'];
-    $db->insert($firstName,$secondName,$age);
 
-//    if ($db->insert($firstName,$secondName,$age)) {
-//        return json_encode(['OK' => 'Данные успешно добавлены']);
-//    } else {
-//        return json_encode(['ERROR' => 'Ошибка добавления данных']);
-//    }
+    if (!empty($firstName) && !empty($secondName) && !empty($age)) {
+        if ($db->insert($firstName, $secondName, $age)) {
+            echo json_encode('Данные успешно добавлены');
+        }
+    } else {
+        echo json_encode('Все поля должны быть заполнены');
+    }
 }
